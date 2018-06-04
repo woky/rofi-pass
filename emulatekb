@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 
 import sys
-from pynput.keyboard import Key, Controller
+import pynput.keyboard as pykb
 
 if len(sys.argv) != 2:
     print(f"Usage: {sys.argv[0]} TEXT")
     sys.exit(1)
 
-kb = Controller()
-kb.type(sys.argv[1])
+kb = pykb.Controller()
+
+for c in sys.argv[1]:
+    if c == '\t':
+        kb.press(pykb.Key.tab)
+        kb.release(pykb.Key.tab)
+    else:
+        kb.type(c)
